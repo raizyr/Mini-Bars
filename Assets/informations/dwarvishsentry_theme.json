@@ -1,6 +1,6 @@
 {
-  "monsterName": "Dwarvish Sentry",
-  "monsterType": "DwarvishSentry",
+  "entityName": "Dwarvish Sentry",
+  "entityType": "DwarvishSentry",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 14
+  "height": 14
 }

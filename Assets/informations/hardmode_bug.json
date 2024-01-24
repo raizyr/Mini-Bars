@@ -1,6 +1,6 @@
 {
-  "monsterName": "Hardmode Bug",
-  "monsterType": "Bug",
+  "entityName": "Hardmode Bug",
+  "entityType": "Bug",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 15
+  "height": 15
 }

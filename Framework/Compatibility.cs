@@ -1,6 +1,6 @@
 ﻿using StardewValley;
 
-namespace MiniBars.Framework
+namespace ImprovedMiniBars.Framework
 {
     public class Compatibility
     {

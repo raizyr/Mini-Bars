@@ -1,10 +1,10 @@
 {
-  "Name": "Mini Bars",
-  "Author": "Ophaneom",
-  "Version": "1.0.4",
-  "Description": "A custom healthbar mod.",
-  "UniqueID": "Ophaneom.MiniBars",
-  "EntryDll": "MiniBars.dll",
+  "Name": "Improved Mini Bars",
+  "Author": "Raizyr",
+  "Version": "1.1.0",
+  "Description": "An improved healthbar mod.",
+  "UniqueID": "Raizyr.ImprovedMiniBars",
+  "EntryDll": "ImprovedMiniBars.dll",
   "MinimumApiVersion": "3.0.0",
-  "UpdateKeys": [ "Nexus:8329" ]
+  "UpdateKeys": [ ]
 }

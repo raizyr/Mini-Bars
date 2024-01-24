@@ -1,6 +1,6 @@
 {
-  "monsterName": "Frost Jelly",
-  "monsterType": "GreenSlime",
+  "entityName": "Frost Jelly",
+  "entityType": "GreenSlime",
   "editableInGame": true,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 3
+  "height": 3
 }

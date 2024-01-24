@@ -1,17 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MiniBars.Framework.Rendering
+namespace ImprovedMiniBars.Framework.Rendering
 {
-    public class BarInformations
+    public class BarInformation
     {
-        public string monsterName;
-        public string monsterType;
+        public string entityName;
+        public string entityType;
         public bool editableInGame;
         public Texture2D texture;
         public Color barColor;
         public Color borderColor;
         public Color hpColor;
-        public int heigth;
+        public int height;
     }
 }

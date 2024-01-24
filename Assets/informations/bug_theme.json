@@ -1,6 +1,6 @@
 {
-  "monsterName": "Bug",
-  "monsterType": "Bug",
+  "entityName": "Bug",
+  "entityType": "Bug",
   "editableInGame": true,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 15
+  "height": 15
 }

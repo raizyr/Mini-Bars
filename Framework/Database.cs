@@ -1,4 +1,4 @@
-﻿namespace MiniBars.Framework
+﻿namespace ImprovedMiniBars.Framework
 {
     public class Database
     {

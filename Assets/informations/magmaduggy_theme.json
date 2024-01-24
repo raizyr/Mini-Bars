@@ -1,6 +1,6 @@
 {
-  "monsterName": "Magma Duggy",
-  "monsterType": "Duggy",
+  "entityName": "Magma Duggy",
+  "entityType": "Duggy",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 3
+  "height": 3
 }

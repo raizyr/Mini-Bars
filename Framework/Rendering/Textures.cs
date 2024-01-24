@@ -5,14 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 using System;
-using System.Threading;
 
-namespace MiniBars.Framework.Rendering
+namespace ImprovedMiniBars.Framework.Rendering
 {
     public class Textures
     {
         private static IMonitor Monitor = ModEntry.instance.Monitor;
-        public static List<BarInformations> barInformations = new List<BarInformations>();
+        public static List<BarInformation> barInformation = new List<BarInformation>();
         public static Texture2D hpSprite;
 
         private static Lazy<Texture2D> _pixelLazy = new(() =>
@@ -26,7 +25,7 @@ namespace MiniBars.Framework.Rendering
 
         public static void LoadTextures()
         {
-            barInformations.Clear();
+            barInformation.Clear();
 
             IModHelper _helper = ModEntry.instance.Helper;
 
@@ -37,18 +36,18 @@ namespace MiniBars.Framework.Rendering
             {
                 string _fileName = (_file.Name).Replace(".png", "");
 
-                BarInformations _informations;
-                _informations = ModEntry.instance.Helper.Data.ReadJsonFile<BarInformations>($"assets/informations/{_fileName}.json") ?? new BarInformations();
+                BarInformation _informations;
+                _informations = ModEntry.instance.Helper.Data.ReadJsonFile<BarInformation>($"assets/informations/{_fileName}.json") ?? new BarInformation();
                 _informations.texture = ModEntry.instance.Helper.ModContent.Load<Texture2D>($"assets/{Database.bars_theme}/{_file.Name}");
 
-                barInformations.Add(_informations);
+                barInformation.Add(_informations);
                 Monitor.Log($"Loaded informations from: {_fileName}", LogLevel.Trace);
             }
             hpSprite = ModEntry.instance.Helper.ModContent.Load<Texture2D>($"assets/hp_sprite.png");
 
-            BarInformations _defaultTheme;
-            _defaultTheme = ModEntry.instance.Helper.Data.ReadJsonFile<BarInformations>($"assets/informations/default_theme.json") ?? new BarInformations();
-            barInformations.Add(_defaultTheme);
+            BarInformation _defaultTheme;
+            _defaultTheme = ModEntry.instance.Helper.Data.ReadJsonFile<BarInformation>($"assets/informations/default_theme.json") ?? new BarInformation();
+            barInformation.Add(_defaultTheme);
         }
     }
 }

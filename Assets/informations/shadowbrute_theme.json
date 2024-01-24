@@ -1,6 +1,6 @@
 {
-  "monsterName": "Shadow Brute",
-  "monsterType": "ShadowBrute",
+  "entityName": "Shadow Brute",
+  "entityType": "ShadowBrute",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 3
+  "height": 3
 }

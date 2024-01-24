@@ -1,6 +1,6 @@
 {
-  "monsterName": "Hardmode Dust",
-  "monsterType": "DustSpirit",
+  "entityName": "Hardmode Dust",
+  "entityType": "DustSpirit",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": 3
+  "height": 3
 }

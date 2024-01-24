@@ -1,6 +1,6 @@
 {
-  "monsterName": "Serpent",
-  "monsterType": "Serpent",
+  "entityName": "Serpent",
+  "entityType": "Serpent",
   "editableInGame": false,
   "texture": null,
   "barColor": {
@@ -21,5 +21,5 @@
     "R": 0,
     "A": 200
   },
-  "heigth": -5
+  "height": -5
 }

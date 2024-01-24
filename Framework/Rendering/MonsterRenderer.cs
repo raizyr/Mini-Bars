@@ -6,11 +6,10 @@ using StardewValley;
 using StardewValley.Monsters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading;
 
-namespace MiniBars.Framework.Rendering
+namespace ImprovedMiniBars.Framework.Rendering
 {
-    public class Renderer
+    public class MonsterRenderer
     {
         private static int _verification_range = 100 * Game1.pixelZoom;
 
@@ -18,7 +17,8 @@ namespace MiniBars.Framework.Rendering
         {
             if (!Context.IsWorldReady) return;
             if (Game1.activeClickableMenu != null || Game1.currentMinigame != null) return;
-
+            if (!ModEntry.config.Show_Monster_Bars) return;
+            
             foreach (Monster _monster in Game1.currentLocation.characters.OfType<Monster>())
             {
                 if (_monster.IsInvisible || !Utility.isOnScreen(_monster.position, 3 * Game1.tileSize) ||
@@ -36,70 +36,70 @@ namespace MiniBars.Framework.Rendering
                 if (!ModEntry.config.Show_Full_Life && _current_health >= _current_max_health) continue;
 
                 string _prefix = "";
-                if (_monster.isHardModeMonster) _prefix = "Hardmode";
-                BarInformations _informations = Textures.barInformations.Find(x => x.monsterName == _prefix + _monster.Name) ??
-                    Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name) ??
-                    Textures.barInformations.Find(x => x.monsterType == "Default Theme");
+                if (_monster.isHardModeMonster.Value) _prefix = "Hardmode";
+                BarInformation _information = Textures.barInformation.Find(x => x.entityName == _prefix + _monster.Name) ??
+                    Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name) ??
+                    Textures.barInformation.Find(x => x.entityType == "Default Theme");
                 if (_monster is GreenSlime _slime)
                 {
                     if (_monster.Name != "Tiger Slime")
                     {
-                        Color c1 = _slime.color;
+                        Color c1 = _slime.color.Value;
                         float cR = c1.R * 1.25f;
                         float cG = c1.G * 1.25f;
                         float cB = c1.B * 1.25f;
                         byte cA = 255;
                         Color c2 = new Color((int)cR, (int)cG, (int)cB, cA);
 
-                        _informations.barColor = c2;
-                        _informations.borderColor = _slime.color;
+                        _information.barColor = c2;
+                        _information.borderColor = _slime.color.Value;
                     }
                 }
-                else if (_monster is Bug _bug && _bug.isArmoredBug)
+                else if (_monster is Bug _bug && _bug.isArmoredBug.Value)
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Armored Bug") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Armored Bug") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
                 else if (_monster is Fly && (Game1.player.currentLocation.Name == "BugLand" || Game1.CurrentMineLevel > 120))
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Mutant Fly") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Mutant Fly") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
                 else if (_monster is Grub && (Game1.player.currentLocation.Name == "BugLand" || Game1.CurrentMineLevel > 120))
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Mutant Grub") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Mutant Grub") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
-                else if (_monster is RockCrab && _monster.name == "Stick Bug")
+                else if (_monster is RockCrab && _monster.Name == "Stick Bug")
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Stick Bug") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Stick Bug") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
                 else if (_monster is RockGolem && _monster.wildernessFarmMonster)
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Wilderness Golem") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Wilderness Golem") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
                 else if (_monster is Shooter)
                 {
-                    _informations = Textures.barInformations.Find(x => x.monsterName == "Shadow Brute") ?? Textures.barInformations.Find(x => x.monsterType == _monster.GetType().Name);
+                    _information = Textures.barInformation.Find(x => x.entityName == "Shadow Brute") ?? Textures.barInformation.Find(x => x.entityType == _monster.GetType().Name);
                 }
                 else if (_monster is BigSlime _bigSlime)
                 {
-                    Color c1 = _bigSlime.c;
+                    Color c1 = _bigSlime.c.Value;
                     float cR = c1.R * 1.25f;
                     float cG = c1.G * 1.25f;
                     float cB = c1.B * 1.25f;
                     byte cA = 255;
                     Color c2 = new Color((int)cR, (int)cG, (int)cB, cA);
 
-                    _informations.barColor = c2;
-                    _informations.borderColor = _bigSlime.c;
+                    _information.barColor = c2;
+                    _information.borderColor = _bigSlime.c.Value;
                 }
                 if (_monster is RockCrab && _monster.Sprite.CurrentFrame % 4 == 0) continue;
                 else if (_monster is RockGolem && _monster.Sprite.CurrentFrame == 16) continue;
                 else if (_monster is Spiker) continue;
 
-                Texture2D _current_sprite = _informations.texture;
-                Color _bar_color = _informations.barColor;
-                Color _border_color = _informations.borderColor;
-                Color _hp_color = _informations.hpColor;
-                int _height = _informations.heigth;
+                Texture2D _current_sprite = _information.texture;
+                Color _bar_color = _information.barColor;
+                Color _border_color = _information.borderColor;
+                Color _hp_color = _information.hpColor;
+                int _height = _information.height;
                 Vector2 _monsterPos = _monster.getLocalPosition(Game1.viewport);
 
                 if (Game1.player.currentLocation.Name == "CrimsonBadlands" || Game1.player.currentLocation.Name == "IridiumQuarry")
@@ -111,7 +111,7 @@ namespace MiniBars.Framework.Rendering
                 Game1.spriteBatch.Draw(
                     Textures.Pixel,
                     new Rectangle(
-                (int)_monsterPos.X - (Textures.Pixel.Width * Game1.pixelZoom) / 2 + (_monster.Sprite.SpriteWidth * Game1.pixelZoom) / 2 - Database.distance_x * Game1.pixelZoom,
+                (int)_monsterPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _monster.Sprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom,
                 (int)_monsterPos.Y - _monster.Sprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom,
                         (Textures.Pixel.Width * Game1.pixelZoom) * Database.bar_size,
                         (Textures.Pixel.Height * Game1.pixelZoom) * 4),
@@ -120,7 +120,7 @@ namespace MiniBars.Framework.Rendering
                 Game1.spriteBatch.Draw(
                     Textures.Pixel,
                     new Rectangle(
-                        (int)_monsterPos.X - (Textures.Pixel.Width * Game1.pixelZoom) / 2 + (_monster.Sprite.SpriteWidth * Game1.pixelZoom) / 2 - Database.distance_x * Game1.pixelZoom,
+                        (int)_monsterPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _monster.Sprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom,
                         (int)_monsterPos.Y - _monster.Sprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom,
                         (Textures.Pixel.Width * Game1.pixelZoom) * (int)((_current_health / _current_max_health) * Database.bar_size),
                         (Textures.Pixel.Height * Game1.pixelZoom) * 4),
@@ -129,7 +129,7 @@ namespace MiniBars.Framework.Rendering
                 Game1.spriteBatch.Draw(
                     _current_sprite,
                     new Rectangle(
-                        (int)_monsterPos.X - (_current_sprite.Width * Game1.pixelZoom) / 2 + (_monster.Sprite.SpriteWidth * Game1.pixelZoom) / 2,
+                        (int)_monsterPos.X - (_current_sprite.Width * Game1.pixelZoom) / 2 + _monster.Sprite.SpriteWidth * Game1.pixelZoom / 2,
                         (int)_monsterPos.Y - _monster.Sprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom,
                         _current_sprite.Width * Game1.pixelZoom,
                         _current_sprite.Height * Game1.pixelZoom),
@@ -139,7 +139,7 @@ namespace MiniBars.Framework.Rendering
                 Game1.spriteBatch.Draw(
                 Textures.hpSprite,
                 new Rectangle(
-                    (int)_monsterPos.X - (Textures.hpSprite.Width * Game1.pixelZoom) / 2 + (_monster.Sprite.SpriteWidth * Game1.pixelZoom) / 2,
+                    (int)_monsterPos.X - Textures.hpSprite.Width * Game1.pixelZoom / 2 + _monster.Sprite.SpriteWidth * Game1.pixelZoom / 2,
                     (int)_monsterPos.Y - _monster.Sprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom,
                     Textures.hpSprite.Width * Game1.pixelZoom,
                     Textures.hpSprite.Height * Game1.pixelZoom),
