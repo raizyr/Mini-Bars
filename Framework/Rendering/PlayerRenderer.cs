@@ -40,8 +40,8 @@ namespace ImprovedMiniBars.Framework.Rendering
                 _border_color = new Color(192, 64, 45);
             }
 
-            const int _height_adjustment = 9;
-            const int _width_adjustment = -9;
+            const int _height_adjustment = 0;
+            const int _width_adjustment = 0;
 
             Game1.spriteBatch.Draw(
                 Textures.Pixel,
