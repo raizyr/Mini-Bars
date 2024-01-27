@@ -6,6 +6,7 @@
         public static int distance_x;
         public static int bar_size;
         public static int player_bar_size;
+        public static int player_distance_x;
 
         public static void GetTheme()
         {
@@ -15,6 +16,7 @@
                 distance_x = 15;
                 bar_size = 31;
                 player_bar_size = 47;
+                player_distance_x = 31;
             }
             else
             {
@@ -22,6 +24,7 @@
                 distance_x = 4;
                 bar_size = 20;
                 player_bar_size = 34;
+                player_distance_x = 34;
             }
         }
     }
