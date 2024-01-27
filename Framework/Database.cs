@@ -14,14 +14,14 @@
                 bars_theme = "Simple_Themes";
                 distance_x = 15;
                 bar_size = 31;
-                player_bar_size = 55;
+                player_bar_size = 47;
             }
             else
             {
                 bars_theme = "Normal_Themes";
                 distance_x = 4;
                 bar_size = 20;
-                player_bar_size = 53;
+                player_bar_size = 34;
             }
         }
     }
