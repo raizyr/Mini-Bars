@@ -11,13 +11,13 @@ namespace ImprovedMiniBars.Framework.Rendering
 {
     public class PlayerRenderer
     {
-        private static int _verification_range = 100 * Game1.pixelZoom;
+        //private static int _verification_range = 100 * Game1.pixelZoom;
 
         public static void OnRendered(object sender, RenderedWorldEventArgs e)
         {
             if (!Context.IsWorldReady) return;
             if (!ModEntry.config.Show_Player_Bar) return;
-            if (!Game1.showingHealth) return;
+            if (!Game1.showingHealth && !ModEntry.config.Show_Full_Life) return;
 
             Farmer _player = Game1.player;
             float _current_health = _player.health;
@@ -40,28 +40,31 @@ namespace ImprovedMiniBars.Framework.Rendering
                 _border_color = new Color(192, 64, 45);
             }
 
+            const int _height_adjustment = 9;
+            const int _width_adjustment = -9;
+
             Game1.spriteBatch.Draw(
                 Textures.Pixel,
                 new Rectangle(
-            (int)_playerPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom,
-            (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom,
-                    (Textures.Pixel.Width * Game1.pixelZoom) * Database.bar_size,
+            (int)_playerPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom + _width_adjustment,
+            (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom + _height_adjustment,
+                    (Textures.Pixel.Width * Game1.pixelZoom) * Database.player_bar_size,
                     (Textures.Pixel.Height * Game1.pixelZoom) * 4),
                 new Color(0, 0, 0, 135));
            
             Game1.spriteBatch.Draw(
                     Textures.Pixel,
             new Rectangle(
-                        (int)_playerPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom,
-                        (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom,
-                        (Textures.Pixel.Width * Game1.pixelZoom) * (int)((_current_health / _current_max_health) * Database.bar_size),
+                        (int)_playerPos.X - Textures.Pixel.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2 - Database.distance_x * Game1.pixelZoom + _width_adjustment,
+                        (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + 8 * Game1.pixelZoom + _height_adjustment,
+                        (Textures.Pixel.Width * Game1.pixelZoom) * (int)((_current_health / _current_max_health) * Database.player_bar_size),
                         (Textures.Pixel.Height * Game1.pixelZoom) * 4),
                     _bar_color);
 
             Game1.spriteBatch.Draw(
                 _current_sprite,
             new Rectangle(
-                    (int)_playerPos.X - (_current_sprite.Width * Game1.pixelZoom) / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2,
+                    (int)_playerPos.X - _current_sprite.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2,
                     (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom,
                     _current_sprite.Width * Game1.pixelZoom,
                     _current_sprite.Height * Game1.pixelZoom),
@@ -71,8 +74,8 @@ namespace ImprovedMiniBars.Framework.Rendering
             Game1.spriteBatch.Draw(
             Textures.hpSprite,
             new Rectangle(
-                (int)_playerPos.X - Textures.hpSprite.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2,
-                (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom,
+                (int)_playerPos.X - Textures.hpSprite.Width * Game1.pixelZoom / 2 + _player.FarmerSprite.SpriteWidth * Game1.pixelZoom / 2 + _width_adjustment,
+                (int)_playerPos.Y - _player.FarmerSprite.SpriteHeight * Game1.pixelZoom - _height * Game1.pixelZoom + _height_adjustment,
                 Textures.hpSprite.Width * Game1.pixelZoom,
                 Textures.hpSprite.Height * Game1.pixelZoom),
             _hp_color);
